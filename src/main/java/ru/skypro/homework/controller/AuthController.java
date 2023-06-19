@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import ru.skypro.homework.dto.LoginReq;
-import ru.skypro.homework.dto.RegisterReq;
-import ru.skypro.homework.dto.Role;
+import ru.skypro.homework.dto.auth.LoginReq;
+import ru.skypro.homework.dto.auth.RegisterReq;
+import ru.skypro.homework.dto.profile.Role;
 import ru.skypro.homework.service.AuthService;
 
-import static ru.skypro.homework.dto.Role.USER;
+import static ru.skypro.homework.dto.profile.Role.USER;
 
 @Slf4j
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(value = {"http://localhost:3000", "http://localhost:3000"})
+@CrossOrigin(value = "http://localhost:3000")
 public class AuthController {
 
     private final AuthService authService;

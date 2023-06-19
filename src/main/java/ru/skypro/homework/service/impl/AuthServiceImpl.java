@@ -1,13 +1,15 @@
 package ru.skypro.homework.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.stereotype.Service;
-import ru.skypro.homework.dto.RegisterReq;
-import ru.skypro.homework.dto.Role;
+import ru.skypro.homework.dto.auth.RegisterReq;
+import ru.skypro.homework.dto.profile.Role;
 import ru.skypro.homework.service.AuthService;
 
 @Service
@@ -16,7 +18,7 @@ public class AuthServiceImpl implements AuthService {
   private final UserDetailsManager manager;
 
   private final PasswordEncoder encoder;
-
+  private final Logger log = LoggerFactory.getLogger(this.getClass());
   public AuthServiceImpl(UserDetailsManager manager, PasswordEncoder passwordEncoder) {
     this.manager = manager;
     this.encoder = passwordEncoder;
@@ -45,11 +47,26 @@ public class AuthServiceImpl implements AuthService {
             .build());
     return true;
   }
+  /**
+   * Проверка авторизации текущего пользователя
+   *
+   * @return true если авторизован {@link boolean}
+   */
+  // дописывать
+  @Override
+  public boolean isAuthorized(ru.skypro.homework.model.User user, Authentication authentication) {
+    return false;
+  }
+  // дописывать
+  @Override
+  public boolean isAuthorized(Authentication authentication) {
+    return false;
+  }
 
   @Override
-  public void changePassword(String currentPassword, String newPassword, Authentication authentication) {
+  public void changePassword(String oldPassword, String newPassword, Authentication authentication) {
     log.info("changePassword " );
     isAuthorized(authentication);
-    userDetailsManager.changePassword(oldPassword, newPassword);
+    manager.changePassword(oldPassword, newPassword);
   }
 }
